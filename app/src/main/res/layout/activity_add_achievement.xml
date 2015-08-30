@@ -1,0 +1,148 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent"
+            android:hint="목표 이름"
+            android:inputType="textNoSuggestions"
+            android:singleLine="true"
+            android:textColorHint="#ececec"
+            android:textSize="30dp"
+            app:met_errorColor="#FF2727"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="목표 이름"
+            app:met_floatingLabelTextColor="#2D5C37"
+            app:met_floatingLabelTextSize="16dp"
+            app:met_primaryColor="#ececec"
+            app:met_textColor="#5fc29c" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="목표 내용"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:maxLines="4"
+            android:textColorHint="#ececec"
+            android:textSize="15dp"
+            app:met_errorColor="#FF2727"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="내용 쓰기"
+            app:met_floatingLabelTextColor="#2D5C37"
+            app:met_floatingLabelTextSize="12dp"
+            app:met_primaryColor="#ececec"
+            app:met_textColor="#5fc29c" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="3dp"
+                    android:text="칭찬 스티커"
+                    android:textColor="#5fc29c"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/picker_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="3dp"
+                    android:text="5개"
+                    android:textColor="#5fc29c"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <com.rey.material.widget.Slider
+                style="@style/Material.Widget.Slider.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:sl_alwaysFillThumb="true"
+                app:sl_maxValue="10"
+                app:sl_minValue="0"
+                app:sl_secondaryColor="#bcecda"
+                app:sl_stepValue="1"
+                app:sl_value="0" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="#ececec" />
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/add_datepick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:text="2015년 9월 23일 15시 32분까지"
+                    android:textColor="#5fc29c"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="변경하려면 클릭하세요."
+                    android:textColor="#b9b9b9"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#ececec" />
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/confirm_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        app:fab_colorNormal="#5fc29c"
+        app:fab_colorPressed="#75B89A"
+        app:fab_icon="@drawable/btn_ok" />
+
+</FrameLayout>
