@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.rey.material.widget.Slider;
+
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.utils.SlidingTabLayout;
 import kr.edcan.awardoftoday.utils.ViewPagerAdapter;
@@ -69,10 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -80,5 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
+    }
+    public void onResume(){
+        super.onResume();
+        setDefault();
     }
 }
