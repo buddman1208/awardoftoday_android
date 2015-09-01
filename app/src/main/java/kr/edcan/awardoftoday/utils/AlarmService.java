@@ -23,7 +23,7 @@ public class AlarmService extends BroadcastReceiver {
         content = intent.getStringExtra("content");
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
-                        .setSmallIcon(R.drawable.ic_prize_on)
+                        .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(content);
         int mNotificationId = 001;

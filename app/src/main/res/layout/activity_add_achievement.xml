@@ -13,7 +13,7 @@
             android:id="@+id/achieve_name"
             android:layout_width="match_parent"
             android:layout_height="90dp"
-            android:background="@android:color/transparent"
+            android:background="#ececec"
             android:hint="목표 이름"
             android:inputType="textNoSuggestions"
             android:singleLine="true"
@@ -24,14 +24,14 @@
             app:met_floatingLabelText="목표 이름"
             app:met_floatingLabelTextColor="#2D5C37"
             app:met_floatingLabelTextSize="16dp"
-            app:met_primaryColor="#ececec"
+            app:met_primaryColor="#5fc29c"
             app:met_textColor="#5fc29c" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/achieve_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="#ececec"
             android:hint="목표 내용"
             android:inputType="textNoSuggestions|textMultiLine"
             android:maxLines="4"
@@ -42,7 +42,7 @@
             app:met_floatingLabelText="내용 쓰기"
             app:met_floatingLabelTextColor="#2D5C37"
             app:met_floatingLabelTextSize="12dp"
-            app:met_primaryColor="#ececec"
+            app:met_primaryColor="#5fc29c"
             app:met_textColor="#5fc29c" />
 
         <RelativeLayout
@@ -89,16 +89,18 @@
                 android:paddingRight="5dp"
                 app:sl_maxValue="10"
                 app:sl_minValue="0"
-                app:sl_secondaryColor="#bcecda"
+                app:sl_secondaryColor="#64C99F"
                 app:sl_stepValue="1"
                 app:sl_value="0" />
         </RelativeLayout>
 
+        `
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="#ececec" />
+            android:background="#CDCDCD" />
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/add_datepick"
@@ -134,8 +136,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#ececec" />
+            android:layout_height="1dp"
+            android:background="#CDCDCD" />
     </LinearLayout>
 
     <com.getbase.floatingactionbutton.FloatingActionButton

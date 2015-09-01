@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/home_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="6dp">
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/no_goal_text"
+        <LinearLayout
+            android:id="@+id/home_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="아직 아무 목표도 설정되지 않았어요.\n[목표]탭에서 목표를 설정해보세요!"
-            android:textSize="19dp"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:padding="6dp">
 
-    </LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/no_goal_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="아직 아무 목표도 설정되지 않았어요.\n[목표]탭에서 목표를 설정해보세요!"
+        android:textSize="15dp" />
+</FrameLayout>

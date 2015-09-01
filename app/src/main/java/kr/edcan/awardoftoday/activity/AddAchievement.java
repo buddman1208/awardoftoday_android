@@ -43,7 +43,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
     DatePickerDialog datePicker;
     TimePickerDialog timePicker;
     MaterialEditText title, content;
-    boolean isSettings = false;
+    boolean isSettings, timeSettings= false;
     String getTitle, getContent, getWhen;
 
     @Override
@@ -102,7 +102,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
                         day = k;
                         isSettings = true;
                     }
-                }, year, month, day);
+                }, year, month-1, day);
                 datePicker.setCancelable(false);
                 datePicker.show();
                 datePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -124,6 +124,8 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
                 public void onTimeSet(TimePicker timePicker, int i, int i1) {
                     hour = i;
                     minute = i1;
+                    timeSettings = true;
+                    achieve_when.setText(year + "년 " + month + "월 " + day + "일 " + hour + "시 " + minute + "분");
                 }
             }, hour, minute, true);
             timePicker.setCancelable(false);
@@ -146,49 +148,53 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_add:
-                sharedCount = sharedPreferences.getInt("count", 1);
-                getTitle = title.getText().toString().trim();
-                getContent = content.getText().toString().trim();
-                getWhen = year + "년 " + month + "월 " + day + "일 " + hour + "시 " + minute + "분";
-                if (getTitle.equals("")) title.setError("목표 이름을 입력해주세요!");
-                else if (getContent.equals("")) content.setError("목표 내용을 입력해주세요!");
+                if(!timeSettings)
+                    Toast.makeText(AddAchievement.this, "시간 설정을 완료해주세요!", Toast.LENGTH_SHORT).show();
                 else {
-                    new MaterialDialog.Builder(AddAchievement.this)
-                            .title("다시 한번 확인해주세요!")
-                            .content(
-                                    "[" + getTitle + "]\n"
-                                            + getContent + "\n"
-                                            + "칭찬스티커 " + reward + "개\n\n"
-                                            + "위의 목표를 " + getWhen + "까지로 설정합니다."
-                            )
-                            .theme(Theme.LIGHT)
-                            .positiveText("설정")
-                            .negativeText("취소")
-                            .callback(new MaterialDialog.ButtonCallback() {
-                                @Override
-                                public void onPositive(MaterialDialog dialog) {
-                                    super.onPositive(dialog);
-                                    AlarmManager alarm = (AlarmManager) AddAchievement.this.getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent = new Intent(AddAchievement.this, AlarmService.class)
-                                            .putExtra("title", getTitle)
-                                            .putExtra("content", getContent);
-                                    PendingIntent pender = PendingIntent.getBroadcast(AddAchievement.this, 0, intent, 0);
-                                    Calendar calendar = Calendar.getInstance();
-                                    calendar.set(year, month - 1, day, hour, minute, second);
-                                    alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pender);
-                                    // TODO Must-be Replaced when we use server
-                                    editor.putString("title"+sharedCount, getTitle);
-                                    editor.putString("content" + sharedCount, getContent);
-                                    editor.putString("when"+sharedCount, year+"."+month+"."+day+"."+hour+"."+minute);
-                                    editor.putInt("reward"+sharedCount, reward);
-                                    editor.putInt("count", sharedCount+1);
-                                    editor.commit();
-                                    Toast.makeText(AddAchievement.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            })
-                            .show();
+                    sharedCount = sharedPreferences.getInt("count", 1);
+                    getTitle = title.getText().toString().trim();
+                    getContent = content.getText().toString().trim();
+                    getWhen = year + "년 " + month + "월 " + day + "일 " + hour + "시 " + minute + "분";
+                    if (getTitle.equals("")) title.setError("목표 이름을 입력해주세요!");
+                    else if (getContent.equals("")) content.setError("목표 내용을 입력해주세요!");
+                    else {
+                        new MaterialDialog.Builder(AddAchievement.this)
+                                .title("다시 한번 확인해주세요!")
+                                .content(
+                                        "[" + getTitle + "]\n"
+                                                + getContent + "\n"
+                                                + "칭찬스티커 " + reward + "개\n\n"
+                                                + "위의 목표를 " + getWhen + "까지로 설정합니다."
+                                )
+                                .theme(Theme.LIGHT)
+                                .positiveText("설정")
+                                .negativeText("취소")
+                                .callback(new MaterialDialog.ButtonCallback() {
+                                    @Override
+                                    public void onPositive(MaterialDialog dialog) {
+                                        super.onPositive(dialog);
+                                        AlarmManager alarm = (AlarmManager) AddAchievement.this.getSystemService(Context.ALARM_SERVICE);
+                                        Intent intent = new Intent(AddAchievement.this, AlarmService.class)
+                                                .putExtra("title", getTitle)
+                                                .putExtra("content", getContent);
+                                        PendingIntent pender = PendingIntent.getBroadcast(AddAchievement.this, 0, intent, 0);
+                                        Calendar calendar = Calendar.getInstance();
+                                        calendar.set(year, month - 1, day, hour, minute, second);
+                                        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pender);
+                                        // TODO Must-be Replaced when we use server
+                                        editor.putString("title" + sharedCount, getTitle);
+                                        editor.putString("content" + sharedCount, getContent);
+                                        editor.putString("when" + sharedCount, year + "." + month + "." + day + "." + hour + "." + minute);
+                                        editor.putInt("reward" + sharedCount, reward);
+                                        editor.putInt("count", sharedCount + 1);
+                                        editor.commit();
+                                        Toast.makeText(AddAchievement.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                })
+                                .show();
 
+                    }
                 }
         }
     }
