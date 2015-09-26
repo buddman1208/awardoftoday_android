@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     cardview:cardElevation="3dp"
+    android:background="#aa0000"
+    cardview:cardCornerRadius="10dp"
     android:layout_margin="10dp"
     cardview:cardUseCompatPadding="true"
     cardview:cardPreventCornerOverlap="false">
-
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:weightSum="3"
