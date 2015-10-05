@@ -5,36 +5,5 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/achieve_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="6dp">
-
-        </LinearLayout>
-    </ScrollView>
-
-    <TextView
-        android:gravity="center"
-        android:visibility="gone"
-        android:id="@+id/no_goal_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="아직 아무 목표도 설정되지 않았어요.\n추가버튼을 눌러 목표를 설정해보세요!"
-        android:textSize="15dp" />
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_achieve"
-        android:layout_width="wrap_content"
-        android:layout_margin="16dp"
-        app:fab_colorNormal="#5fc29c"
-        app:fab_colorPressed="#75B89A"
-        app:fab_icon="@drawable/btn_add"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"/>
 
 </FrameLayout>

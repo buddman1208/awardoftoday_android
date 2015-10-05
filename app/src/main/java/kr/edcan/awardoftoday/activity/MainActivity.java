@@ -10,15 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.balysv.materialripple.MaterialRippleLayout;
 
+//import kr.edcan.aiolib.EDCAN;
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.utils.ViewPagerAdapter;
 
@@ -47,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTab(0, true);
         sharedPreferences = getSharedPreferences("AwardOfToday", 0);
         editor = sharedPreferences.edit();
+//        EDCAN edcan = new EDCAN(getApplicationContext());
+//        edcan.showDialog("환영합니다", "ㅁㄴㅇㄹ");
     }
 
     public void setDefault() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer_launcher = (ImageView) findViewById(R.id.drawer_launch);
         updown_state = (ImageView) findViewById(R.id.updown_state);
         updown_state.setOnClickListener(this);
         drawer_launcher.setOnClickListener(this);
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tab_award = (ImageView) findViewById(R.id.main_tab_award_image);
         tab_achieve = (ImageView) findViewById(R.id.main_tab_achieve_image);
         tabs = new ImageView[]{tab_home, tab_achieve, tab_want, tab_award};
-        tab_on = new int[]{R.drawable.ic_tab_home_on, R.drawable.ic_tab_mygoal_on, R.drawable.ic_tab_wants_on, R.drawable.ic_tab_prize_on};
+        tab_on = new int[]{R.drawable.ic_tab_sticker_on, R.drawable.ic_tab_homeworks_on, R.drawable.ic_tab_wants_on, R.drawable.on};
         tab_off = new int[]{R.drawable.ic_tab_home_off, R.drawable.ic_tab_mygoal_off, R.drawable.ic_tab_wants_off, R.drawable.ic_tab_prize_off};
         text = new TextView[]{t1, t2, t3, t4};
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

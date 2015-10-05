@@ -148,6 +148,6 @@
         android:layout_margin="16dp"
         app:fab_colorNormal="#5fc29c"
         app:fab_colorPressed="#75B89A"
-        app:fab_icon="@drawable/btn_ok" />
+        app:fab_icon="@drawable/ic_circle_ok" />
 
 </FrameLayout>

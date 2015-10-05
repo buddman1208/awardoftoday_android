@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -19,7 +20,11 @@ android {
     }
     repositories {
         maven { url "https://jitpack.io" }
+        flatDir{
+            dirs 'libs'
+        }
     }
+
 }
 
 dependencies {
@@ -35,4 +40,5 @@ dependencies {
     compile('com.afollestad.material-dialogs:commons:0.8.0.1@aar') {
         transitive = true
     }
+//    compile(name:'EDCAN', ext:'aar')
 }

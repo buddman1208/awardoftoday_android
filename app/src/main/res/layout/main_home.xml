@@ -3,28 +3,30 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#EEEEEE">
 
-    <ScrollView android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="5">
 
         <LinearLayout
-            android:id="@+id/home_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/home_top">
 
         </LinearLayout>
-    </ScrollView>
 
-    <TextView
-        android:gravity="center"
-        android:visibility="gone"
-        android:id="@+id/no_goal_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="아직 아무 목표도 설정되지 않았어요.\n[목표]탭에서 목표를 설정해보세요!"
-        android:textSize="15dp" />
+        <LinearLayout
+            android:background="@drawable/home_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="4"></LinearLayout>
+    </LinearLayout>
 </FrameLayout>
