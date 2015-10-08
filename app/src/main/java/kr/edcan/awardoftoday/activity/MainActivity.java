@@ -3,9 +3,7 @@ package kr.edcan.awardoftoday.activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +15,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-//import kr.edcan.aiolib.EDCAN;
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.utils.ViewPagerAdapter;
+
+//import kr.edcan.aiolib.EDCAN;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,8 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    DrawerLayout drawerLayout;
-    ImageView drawer_launcher, updown_state;
+    ImageView settings;
     ViewPager pager;
     ViewPagerAdapter adapter;
     String Titles[] = {"홈", "목표", "원해요", "상"}, UpDownList[] = {"최신순", "오래된순", "남은시간"};
@@ -46,14 +44,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTab(0, true);
         sharedPreferences = getSharedPreferences("AwardOfToday", 0);
         editor = sharedPreferences.edit();
-//        EDCAN edcan = new EDCAN(getApplicationContext());
-//        edcan.showDialog("환영합니다", "ㅁㄴㅇㄹ");
     }
 
     public void setDefault() {
-        updown_state = (ImageView) findViewById(R.id.updown_state);
-        updown_state.setOnClickListener(this);
-        drawer_launcher.setOnClickListener(this);
+        settings = (ImageView) findViewById(R.id.settings);
+        settings.setOnClickListener(this);
         adapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, tab_count);
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
@@ -75,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tab_award = (ImageView) findViewById(R.id.main_tab_award_image);
         tab_achieve = (ImageView) findViewById(R.id.main_tab_achieve_image);
         tabs = new ImageView[]{tab_home, tab_achieve, tab_want, tab_award};
-        tab_on = new int[]{R.drawable.ic_tab_sticker_on, R.drawable.ic_tab_homeworks_on, R.drawable.ic_tab_wants_on, R.drawable.on};
-        tab_off = new int[]{R.drawable.ic_tab_home_off, R.drawable.ic_tab_mygoal_off, R.drawable.ic_tab_wants_off, R.drawable.ic_tab_prize_off};
+        tab_on = new int[]{R.drawable.ic_tab_sticker_on, R.drawable.ic_tab_homeworks_on, R.drawable.ic_tab_wants_on, R.drawable.ic_tab_reward_on};
+        tab_off = new int[]{R.drawable.ic_tab_sticker_off, R.drawable.ic_tab_homeworks_off, R.drawable.ic_tab_wants_off, R.drawable.ic_tab_reward_off};
         text = new TextView[]{t1, t2, t3, t4};
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -137,10 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.drawer_launch:
-                drawerLayout.openDrawer(GravityCompat.START);
-                break;
-            case R.id.updown_state:
+            case R.id.settings:
                 new MaterialDialog.Builder(this)
                         .title("정렬")
                         .items(UpDownList)
@@ -159,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.main_tab_home:
                 pager.setCurrentItem(0, true);
-                Toast.makeText(MainActivity.this, "", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.main_tab_achieve:
                 pager.setCurrentItem(1, true);
