@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView settings;
     ViewPager pager;
     ViewPagerAdapter adapter;
+    LinearLayout under_1, under_2, under_3, under_4, under[];
     String Titles[] = {"홈", "목표", "원해요", "상"}, UpDownList[] = {"최신순", "오래된순", "남은시간"};
     String on_color = "#EF90B1", off_color = "#E6E6E6";
     int tab_count = 4, tab_on[], tab_off[];
@@ -73,6 +75,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tab_on = new int[]{R.drawable.ic_tab_sticker_on, R.drawable.ic_tab_homeworks_on, R.drawable.ic_tab_wants_on, R.drawable.ic_tab_reward_on};
         tab_off = new int[]{R.drawable.ic_tab_sticker_off, R.drawable.ic_tab_homeworks_off, R.drawable.ic_tab_wants_off, R.drawable.ic_tab_reward_off};
         text = new TextView[]{t1, t2, t3, t4};
+        under_1 = (LinearLayout) findViewById(R.id.main_tab_under_bar_1);
+        under_2 = (LinearLayout) findViewById(R.id.main_tab_under_bar_2);
+        under_3 = (LinearLayout) findViewById(R.id.main_tab_under_bar_3);
+        under_4 = (LinearLayout) findViewById(R.id.main_tab_under_bar_4);
+        under = new LinearLayout[]{under_1, under_2, under_3, under_4};
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -101,9 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (i == position) {
                 tabs[i].setImageResource(tab_on[i]);
                 text[i].setTextColor(Color.parseColor(on_color));
+                under[i].setVisibility(View.VISIBLE);
             } else {
                 tabs[i].setImageResource(tab_off[i]);
                 text[i].setTextColor(Color.parseColor(off_color));
+                under[i].setVisibility(View.GONE);
             }
         }
     }

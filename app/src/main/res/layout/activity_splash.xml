@@ -1,0 +1,151 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_splash" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/title_splash" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <Space
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/user_id_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="ID 입력"
+                            android:textColor="@android:color/white"
+                            app:met_baseColor="#FFF"
+                            app:met_errorColor="#E00"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelText="ID 입력"
+                            app:met_floatingLabelTextSize="14dp"
+                            app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_singleLineEllipsis="true"
+                            app:met_textColorHint="#E5E5E5"
+                            app:met_underlineColor="#FFF" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/user_pw_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="비밀번호 입력"
+                            android:textColor="@android:color/white"
+                            app:met_baseColor="#FFF"
+                            android:inputType="textPassword"
+                            app:met_errorColor="#E00"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelText="비밀번호 입력"
+                            app:met_floatingLabelTextSize="14dp"
+                            app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_singleLineEllipsis="true"
+                            app:met_textColorHint="#E5E5E5"
+                            app:met_underlineColor="#FFF" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/user_name_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="이름 입력"
+                            android:textColor="@android:color/white"
+                            android:textColorHighlight="#E1E1E1"
+                            app:met_floatingLabelTextSize="14dp"
+                            app:met_baseColor="#FFF"
+                            app:met_errorColor="#E00"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelText="이름 입력"
+                            app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_singleLineEllipsis="true"
+                            app:met_textColorHint="#E5E5E5"
+                            app:met_underlineColor="#FFF" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/login_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp">
+
+                        <ImageView
+                            android:id="@+id/btn_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/login_bg_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="로그인"
+                            android:textStyle="bold"
+                            android:textColor="@color/main_color"
+                            android:textSize="14dp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/register_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                        <ImageView
+                            android:id="@+id/register_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/register_bg_selector" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="회원가입"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:textSize="14dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

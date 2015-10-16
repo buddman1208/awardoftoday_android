@@ -73,7 +73,7 @@ public class Tab_Achieve extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 //            case R.id.add_achieve:
-//                startActivity(new Intent(getContext(), AddAchievement.class));
+//                startActivity(new Intent(getContext(), AddAchievementActivity.class));
 //                break;
         }
     }

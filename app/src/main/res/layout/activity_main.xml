@@ -48,12 +48,6 @@
 
                         </LinearLayout>
 
-                        <!--<kr.edcan.awardoftoday.utils.SlidingTabLayout-->
-                        <!--android:id="@+id/tabs"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@android:color/transparent"-->
-                        <!--android:elevation="2dp" />-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
@@ -94,6 +88,14 @@
                                             android:text="홈"
                                             android:textColor="#F497B7" />
                                     </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/main_tab_under_bar_1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="4dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:background="#EE8FB0"
+                                        android:orientation="vertical" />
+
                                 </RelativeLayout>
                             </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -130,6 +132,14 @@
                                             android:text="홈"
                                             android:textColor="#F497B7" />
                                     </LinearLayout>
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:id="@+id/main_tab_under_bar_2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="4dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:background="#EE8FB0"
+                                        android:orientation="vertical" />
                                 </RelativeLayout>
                             </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -167,6 +177,14 @@
                                             android:text="홈"
                                             android:textColor="#F497B7" />
                                     </LinearLayout>
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:id="@+id/main_tab_under_bar_3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="4dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:background="#EE8FB0"
+                                        android:orientation="vertical" />
                                 </RelativeLayout>
                             </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -174,7 +192,6 @@
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
 
                                 <RelativeLayout
@@ -204,6 +221,14 @@
                                             android:text="홈"
                                             android:textColor="#F497B7" />
                                     </LinearLayout>
+                                    <LinearLayout
+                                        android:visibility="gone"
+                                        android:id="@+id/main_tab_under_bar_4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="4dp"
+                                        android:layout_alignParentBottom="true"
+                                        android:background="#EE8FB0"
+                                        android:orientation="vertical" />
                                 </RelativeLayout>
                             </com.balysv.materialripple.MaterialRippleLayout>
                         </LinearLayout>

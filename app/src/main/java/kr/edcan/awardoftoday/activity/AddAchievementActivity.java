@@ -25,7 +25,6 @@ import com.afollestad.materialdialogs.Theme;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.rey.material.widget.Slider;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,11 +32,11 @@ import java.util.GregorianCalendar;
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.utils.AlarmService;
 
-public class AddAchievement extends AppCompatActivity implements View.OnClickListener {
+public class AddAchievementActivity extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int year, month, day, hour, minute, second = 0, reward, sharedCount;
-    Slider reward_count;
+//    Slider reward_count;
     TextView picker_count, achieve_when;
     FloatingActionButton confirm;
     DatePickerDialog datePicker;
@@ -71,16 +70,16 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
         confirm = (FloatingActionButton) findViewById(R.id.confirm_add);
         picker_count = (TextView) findViewById(R.id.picker_count);
         achieve_when = (TextView) findViewById(R.id.achieve_when);
-        reward_count = (Slider) findViewById(R.id.reward_count);
+//        reward_count = (Slider) findViewById(R.id.reward_count);
         picker_count.setText("0개");
         confirm.setOnClickListener(this);
-        reward_count.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
-            @Override
-            public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
-                picker_count.setText(slider.getValue() + "개");
-                reward = slider.getValue();
-            }
-        });
+//        reward_count.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
+//            @Override
+//            public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
+//                picker_count.setText(slider.getValue() + "개");
+//                reward = slider.getValue();
+//            }
+//        });
         GregorianCalendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -94,7 +93,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
         datePick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker = new DatePickerDialog(AddAchievement.this, new DatePickerDialog.OnDateSetListener() {
+                datePicker = new DatePickerDialog(AddAchievementActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(android.widget.DatePicker datePicker, int i, int j, int k) {
                         year = i;
@@ -119,7 +118,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
 
     void setTimeDialog() {
         if (isSettings == true) {
-            timePicker = new TimePickerDialog(AddAchievement.this, new TimePickerDialog.OnTimeSetListener() {
+            timePicker = new TimePickerDialog(AddAchievementActivity.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker timePicker, int i, int i1) {
                     hour = i;
@@ -149,7 +148,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.confirm_add:
                 if(!timeSettings)
-                    Toast.makeText(AddAchievement.this, "시간 설정을 완료해주세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddAchievementActivity.this, "시간 설정을 완료해주세요!", Toast.LENGTH_SHORT).show();
                 else {
                     sharedCount = sharedPreferences.getInt("count", 1);
                     getTitle = title.getText().toString().trim();
@@ -158,7 +157,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
                     if (getTitle.equals("")) title.setError("목표 이름을 입력해주세요!");
                     else if (getContent.equals("")) content.setError("목표 내용을 입력해주세요!");
                     else {
-                        new MaterialDialog.Builder(AddAchievement.this)
+                        new MaterialDialog.Builder(AddAchievementActivity.this)
                                 .title("다시 한번 확인해주세요!")
                                 .content(
                                         "[" + getTitle + "]\n"
@@ -173,11 +172,11 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
                                     @Override
                                     public void onPositive(MaterialDialog dialog) {
                                         super.onPositive(dialog);
-                                        AlarmManager alarm = (AlarmManager) AddAchievement.this.getSystemService(Context.ALARM_SERVICE);
-                                        Intent intent = new Intent(AddAchievement.this, AlarmService.class)
+                                        AlarmManager alarm = (AlarmManager) AddAchievementActivity.this.getSystemService(Context.ALARM_SERVICE);
+                                        Intent intent = new Intent(AddAchievementActivity.this, AlarmService.class)
                                                 .putExtra("title", getTitle)
                                                 .putExtra("content", getContent);
-                                        PendingIntent pender = PendingIntent.getBroadcast(AddAchievement.this, 0, intent, 0);
+                                        PendingIntent pender = PendingIntent.getBroadcast(AddAchievementActivity.this, 0, intent, 0);
                                         Calendar calendar = Calendar.getInstance();
                                         calendar.set(year, month - 1, day, hour, minute, second);
                                         alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pender);
@@ -188,7 +187,7 @@ public class AddAchievement extends AppCompatActivity implements View.OnClickLis
                                         editor.putInt("reward" + sharedCount, reward);
                                         editor.putInt("count", sharedCount + 1);
                                         editor.commit();
-                                        Toast.makeText(AddAchievement.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AddAchievementActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                 })

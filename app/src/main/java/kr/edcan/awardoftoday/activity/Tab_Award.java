@@ -15,7 +15,8 @@ import kr.edcan.awardoftoday.R;
 public class Tab_Award extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.main_award,container,false);
+        View v = inflater.inflate(R.layout.main_award, container, false);
+
         return v;
     }
 }
