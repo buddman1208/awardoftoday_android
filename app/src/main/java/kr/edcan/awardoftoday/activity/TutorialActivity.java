@@ -2,11 +2,15 @@ package kr.edcan.awardoftoday.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.data.User;
@@ -16,7 +20,9 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
+/**
+ * Created by Junseok Oh on 2015-10-11.
+ */
 public class TutorialActivity extends AppCompatActivity implements View.OnClickListener {
 
     NetworkService service;
@@ -25,7 +31,6 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     boolean isParent;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
-
     ImageView confirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,31 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onBackPressed() {
+        new MaterialDialog.Builder(TutorialActivity.this)
+                .title("오늘의 어린이상!")
+                .content("정말로 종료하시겠습니까?")
+                .positiveText("확인")
+                .negativeText("취소")
+                .negativeColor(Color.parseColor("#8B8B8B"))
+                .positiveColor(Color.parseColor("#F499B8"))
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        finish();
+                    }
+                })
+                .show();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+        }
+        return false;
+    }
+    @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.tutorial_child_complete:
@@ -87,7 +117,9 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
                 });
                 break;
             case R.id.tutorial_find_child:
-
+                startActivity(new Intent(getApplicationContext(), FindMyChildActivity.class));
+                finish();
+                break;
         }
     }
 }

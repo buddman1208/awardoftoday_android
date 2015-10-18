@@ -32,6 +32,9 @@ import java.util.GregorianCalendar;
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.utils.AlarmService;
 
+/**
+ * Created by Junseok Oh on 2015-10-11.
+ */
 public class AddAchievementActivity extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;

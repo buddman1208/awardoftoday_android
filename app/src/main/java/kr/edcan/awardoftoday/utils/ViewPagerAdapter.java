@@ -1,15 +1,11 @@
 package kr.edcan.awardoftoday.utils;
 
-/**
- * Created by kotohana5706 on 2015. 8. 30..
- */
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import kr.edcan.awardoftoday.activity.Tab_Achieve;
-import kr.edcan.awardoftoday.activity.Tab_Award;
+import kr.edcan.awardoftoday.activity.Tab_Status;
 import kr.edcan.awardoftoday.activity.Tab_Home;
 import kr.edcan.awardoftoday.activity.Tab_Want;
 
@@ -42,7 +38,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new Tab_Want();
             case 3:
-                return new Tab_Award();
+                return new Tab_Status();
             default:
                 return null;
         }

@@ -9,39 +9,50 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg_splash" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
 
-        <LinearLayout
-            android:layout_centerInParent="true"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="4"
             android:orientation="vertical">
-
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="50dp"
                 android:src="@drawable/title_splash" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                android:weightSum="7">
+                android:weightSum="4">
 
                 <Space
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2" />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -59,8 +70,8 @@
                             app:met_errorColor="#E00"
                             app:met_floatingLabel="normal"
                             app:met_floatingLabelText="ID 입력"
-                            app:met_floatingLabelTextSize="14dp"
                             app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_floatingLabelTextSize="14dp"
                             app:met_singleLineEllipsis="true"
                             app:met_textColorHint="#E5E5E5"
                             app:met_underlineColor="#FFF" />
@@ -70,14 +81,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="비밀번호 입력"
+                            android:inputType="textPassword"
                             android:textColor="@android:color/white"
                             app:met_baseColor="#FFF"
-                            android:inputType="textPassword"
                             app:met_errorColor="#E00"
                             app:met_floatingLabel="normal"
                             app:met_floatingLabelText="비밀번호 입력"
-                            app:met_floatingLabelTextSize="14dp"
                             app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_floatingLabelTextSize="14dp"
                             app:met_singleLineEllipsis="true"
                             app:met_textColorHint="#E5E5E5"
                             app:met_underlineColor="#FFF" />
@@ -89,63 +100,69 @@
                             android:hint="이름 입력"
                             android:textColor="@android:color/white"
                             android:textColorHighlight="#E1E1E1"
-                            app:met_floatingLabelTextSize="14dp"
                             app:met_baseColor="#FFF"
                             app:met_errorColor="#E00"
                             app:met_floatingLabel="normal"
                             app:met_floatingLabelText="이름 입력"
                             app:met_floatingLabelTextColor="#e5e5e5"
+                            app:met_floatingLabelTextSize="14dp"
                             app:met_singleLineEllipsis="true"
                             app:met_textColorHint="#E5E5E5"
                             app:met_underlineColor="#FFF" />
                     </LinearLayout>
 
-                    <RelativeLayout
-                        android:id="@+id/login_layout"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="40dp">
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:id="@+id/btn_login"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/login_bg_selector" />
+                        <RelativeLayout
+                            android:id="@+id/login_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
-                        <TextView
+                            <ImageView
+                                android:id="@+id/btn_login"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/login_bg_selector" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="로그인"
+                                android:textColor="@color/main_color"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/register_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="로그인"
-                            android:textStyle="bold"
-                            android:textColor="@color/main_color"
-                            android:textSize="14dp" />
+                            android:layout_marginTop="10dp">
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:id="@+id/register_button"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@drawable/register_bg_selector" />
 
-                    <RelativeLayout
-                        android:id="@+id/register_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp">
-
-                        <ImageView
-                            android:id="@+id/register_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/register_bg_selector" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="회원가입"
-                            android:textColor="@android:color/white"
-                            android:textStyle="bold"
-                            android:textSize="14dp" />
-                    </RelativeLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="회원가입"
+                                android:textColor="@android:color/white"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </FrameLayout>

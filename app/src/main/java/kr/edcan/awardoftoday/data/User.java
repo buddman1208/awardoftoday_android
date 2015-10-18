@@ -9,13 +9,15 @@ public class User {
     public String name;
     public String apikey;
     public String targetApikey;
+    public String targetName;
     public boolean isParent;
-    public User(String id, String password, String name, String apikey, String targetApikey,  boolean isParent){
+    public User(String id, String password, String name, String apikey, String targetApikey, String targetName, boolean isParent){
         this.id =id;
         this.password = password;
         this.name = name;
         this.apikey = apikey;
         this.targetApikey = targetApikey;
+        this.targetName = targetName;
         this.isParent = isParent;
     }
 }

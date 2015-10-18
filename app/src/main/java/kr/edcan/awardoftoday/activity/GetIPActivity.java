@@ -10,6 +10,9 @@ import android.widget.EditText;
 
 import kr.edcan.awardoftoday.R;
 
+/**
+ * Created by Junseok Oh on 2015-10-11.
+ */
 public class GetIPActivity extends AppCompatActivity {
 
     Button button;
@@ -22,7 +25,7 @@ public class GetIPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_ip);
         button = (Button) findViewById(R.id.next);
         editText = (EditText) findViewById(R.id.asdf);
-        editText.setText("http://192.168.1.100:3000");
+        editText.setText("http://192.168.1.8:3000");
         asfd = getSharedPreferences("AwardOfToday", 0);
         editor = asfd.edit();
         button.setOnClickListener(new View.OnClickListener() {

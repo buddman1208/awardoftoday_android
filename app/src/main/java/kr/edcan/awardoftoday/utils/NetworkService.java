@@ -16,10 +16,6 @@ public interface NetworkService {
     void userLogin(@Field("id") String id, @Field("password") String password, Callback<User> callback);
 
     @FormUrlEncoded
-    @POST("/auth/login")
-    void userLogout(@Field("apikey") String apikey, Callback<String> callback);
-
-    @FormUrlEncoded
     @POST("/auth/loginValidate")
     void loginValidate(@Field("apikey") String apikey, Callback<String> callback);
 
@@ -30,13 +26,14 @@ public interface NetworkService {
                       Callback<String> callback);
 
     // Parent Interface
+
     @FormUrlEncoded
     @POST("/parent/findChild")
     void findChild(@Field("id") String id, Callback<User> callback);
 
     @FormUrlEncoded
     @POST("/parent/registerChild")
-    void registerChild(@Field("targetApikey") String id, @Field("apikey") String apikey,
+    void registerChild(@Field("name") String name, @Field("apikey") String apikey, @Field("targetName") String targetName, @Field("targetApikey") String targetApikey,
                        Callback<User> callback);
 
     // Child Interface

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.edcan.awardoftoday" >
+    package="kr.edcan.awardoftoday">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -8,37 +8,33 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="오늘의 어린이상!"
-        android:theme="@style/BasicTheme" >
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="오늘의 어린이상!" >
-        </activity>
-        <activity
-            android:name=".activity.AddAchievementActivity"
-            android:label="@string/title_activity_add_achievement"
-            android:theme="@style/BasicTheme.ActionBar" >
-        </activity>
-
-        <receiver android:name=".utils.AlarmService" />
-
-        <activity android:name=".activity.TutorialActivity" >
-        </activity>
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/BasicTheme" >
-
-        </activity>
-        <activity android:name=".activity.SettingsActivity" >
-        </activity>
-        <activity android:name=".activity.SelectIsParentActivity" >
-        </activity>
-        <activity android:name=".activity.GetIPActivity" >
+        android:theme="@style/BasicTheme.ActionBar">
+        <activity android:name=".activity.GetIPActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="오늘의 어린이상!" />
+        <activity
+            android:name=".activity.AddAchievementActivity"
+            android:label="@string/title_activity_add_achievement"
+            android:theme="@style/BasicTheme.ActionBar" />
+
+        <receiver android:name=".utils.AlarmService" />
+        <activity android:name=".activity.TutorialActivity" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/BasicTheme" />
+        <activity android:name=".activity.SettingsActivity" />
+        <activity android:name=".activity.SelectIsParentActivity" />
+        <activity android:name=".activity.FindMyChildActivity" />
+        <activity
+            android:name=".activity.DeveloperInfoActivity"
+            android:theme="@style/BasicTheme.ActionBar" />
     </application>
 
 </manifest>
