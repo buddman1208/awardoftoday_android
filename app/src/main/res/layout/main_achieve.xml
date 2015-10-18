@@ -150,6 +150,7 @@
                     android:padding="10dp">
 
                     <LinearLayout
+                        android:id="@+id/achieve_tab1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -181,6 +182,7 @@
                     android:padding="10dp">
 
                     <LinearLayout
+                        android:id="@+id/achieve_tab2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -213,6 +215,7 @@
                     android:padding="10dp">
 
                     <LinearLayout
+                        android:id="@+id/achieve_tab3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -256,16 +259,17 @@
                     cardview:cardPreventCornerOverlap="false"
                     cardview:cardUseCompatPadding="true">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/achieve_header"
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:orientation="horizontal">
+                        android:layout_height="180dp">
+
                         <ImageView
-                            android:src="@drawable/no"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/no_homeworks" />
+                    </RelativeLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
         </LinearLayout>
