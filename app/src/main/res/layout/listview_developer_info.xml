@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+    <TextView
+        android:textSize="10dp"
+        android:textColor="@color/main_color"
+        android:text="총 개발자"
+        android:textStyle="bold"
+        android:id="@+id/developer_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="3dp"
+        android:textSize="16dp"
+        android:textColor="#7A7A7A"
+        android:text="총 개발자"
+        android:id="@+id/developer_info_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
