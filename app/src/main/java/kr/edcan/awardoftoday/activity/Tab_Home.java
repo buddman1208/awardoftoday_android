@@ -44,7 +44,7 @@ public class Tab_Home extends Fragment {
 //            noText.setVisibility(View.VISIBLE);
 //        } else if(byTime){
 //            for (int i = 1; i <= sharedCount-1; i++) {
-//                CardView route_info_tab = (CardView) cardInflator.inflate(R.layout.cardview_layout, null);
+//                CardView route_info_tab = (CardView) cardInflator.inflate(R.layout.achieve_cardview_layout, null);
 //                TextView title = (TextView) route_info_tab.findViewById(R.id.card_title);
 //                TextView content = (TextView) route_info_tab.findViewById(R.id.card_description);
 //                TextView reward = (TextView) route_info_tab.findViewById(R.id.card_reward);
@@ -55,7 +55,7 @@ public class Tab_Home extends Fragment {
 //            }
 //        } else {
 //            for (int i = sharedCount-1;i>=1; i--) {
-//                CardView route_info_tab = (CardView) cardInflator.inflate(R.layout.cardview_layout, null);
+//                CardView route_info_tab = (CardView) cardInflator.inflate(R.layout.achieve_cardview_layout, null);
 //                TextView title = (TextView) route_info_tab.findViewById(R.id.card_title);
 //                TextView content = (TextView) route_info_tab.findViewById(R.id.card_description);
 //                TextView reward = (TextView) route_info_tab.findViewById(R.id.card_reward);
