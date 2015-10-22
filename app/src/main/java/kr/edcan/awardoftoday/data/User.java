@@ -10,8 +10,9 @@ public class User {
     public String apikey;
     public String targetApikey;
     public String targetName;
+    public int sticker;
     public boolean isParent;
-    public User(String id, String password, String name, String apikey, String targetApikey, String targetName, boolean isParent){
+    public User(String id, String password, String name, String apikey, String targetApikey, String targetName, int sticker, boolean isParent){
         this.id =id;
         this.password = password;
         this.name = name;
@@ -19,5 +20,6 @@ public class User {
         this.targetApikey = targetApikey;
         this.targetName = targetName;
         this.isParent = isParent;
+        this.sticker = sticker;
     }
 }

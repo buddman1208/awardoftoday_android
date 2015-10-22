@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,19 @@ public class DeveloperInfoActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                switch (position){
+                    case 0:
+                        Toast.makeText(DeveloperInfoActivity.this, "그만 밤새게 해주세요 제발", Toast.LENGTH_SHORT).show();
+                    case 1:
+                        Toast.makeText(DeveloperInfoActivity.this, "제발 자게 해주세요", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        Toast.makeText(DeveloperInfoActivity.this, "김영환 덤벼", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        Toast.makeText(DeveloperInfoActivity.this, "누가 요즘 기획자가 기획하죠 깔깔깔", Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
         });
     }

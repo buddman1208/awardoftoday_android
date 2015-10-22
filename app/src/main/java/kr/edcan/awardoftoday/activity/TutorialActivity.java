@@ -105,6 +105,9 @@ public class TutorialActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void success(User user, Response response) {
                         Toast.makeText(getApplicationContext(), "부모님과 연결되었어요!", Toast.LENGTH_SHORT).show();
+                        editor.putString("targetName", user.targetName);
+                        editor.putString("targetApikey", user.targetApikey);
+                        editor.commit();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     }

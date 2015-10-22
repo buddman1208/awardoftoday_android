@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.edcan.awardoftoday">
+    package="kr.edcan.awardoftoday" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="오늘의 어린이상!"
-        android:theme="@style/BasicTheme.ActionBar">
-        <activity android:name=".activity.GetIPActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/BasicTheme.ActionBar" >
+        <activity android:name=".activity.GetIPActivity" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.MainActivity"
@@ -25,16 +30,61 @@
             android:theme="@style/BasicTheme.ActionBar" />
 
         <receiver android:name=".utils.AlarmService" />
+
         <activity android:name=".activity.TutorialActivity" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/BasicTheme" />
         <activity android:name=".activity.SettingsActivity" />
-        <activity android:name=".activity.SelectIsParentActivity" />
+        <activity
+            android:name=".activity.SelectIsParentActivity"
+            android:theme="@style/BasicTheme" />
         <activity android:name=".activity.FindMyChildActivity" />
         <activity
             android:name=".activity.DeveloperInfoActivity"
             android:theme="@style/BasicTheme.ActionBar" />
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.example.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".utils.GcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".utils.IDListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".utils.RegisterationIntentService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activity.ParentConfirmActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

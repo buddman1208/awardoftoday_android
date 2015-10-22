@@ -1,19 +1,15 @@
 package kr.edcan.awardoftoday.activity;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,12 +21,19 @@ import com.afollestad.materialdialogs.Theme;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rey.material.widget.Slider;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import kr.edcan.awardoftoday.R;
-import kr.edcan.awardoftoday.utils.AlarmService;
+import kr.edcan.awardoftoday.data.Article;
+import kr.edcan.awardoftoday.utils.DeveloperService;
+import kr.edcan.awardoftoday.utils.NetworkService;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Junseok Oh on 2015-10-11.
@@ -38,8 +41,8 @@ import kr.edcan.awardoftoday.utils.AlarmService;
 public class AddAchievementActivity extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    int year, month, day, hour, minute, second = 0, reward, sharedCount;
-//    Slider reward_count;
+    int year, month, day, hour, minute, reward;
+    Slider reward_count;
     TextView picker_count, achieve_when;
     FloatingActionButton confirm;
     DatePickerDialog datePicker;
@@ -47,48 +50,57 @@ public class AddAchievementActivity extends AppCompatActivity implements View.On
     MaterialEditText title, content;
     boolean isSettings, timeSettings= false;
     String getTitle, getContent, getWhen;
-
+    NetworkService service;
+    RestAdapter restAdapter;
+    public String API_KEY, date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_achievement);
-        setActionBar();
+        setActionBar(getSupportActionBar());
         setDefault();
+        setRest();
         setDatePick();
     }
 
-    void setActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#46A67C")));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(Html.fromHtml("<b>새로운 목표</b>"));
-        actionBar.setElevation(0);
+    private void setActionBar(ActionBar actionbar) {
+        actionbar.setTitle(Html.fromHtml("<b>새로운 목표</b>"));
+        actionbar.setDisplayHomeAsUpEnabled(true);
     }
 
-    void setDefault() {
+    public void setDefault() {
         sharedPreferences = getSharedPreferences("AwardOfToday", 1);
         editor = sharedPreferences.edit();
+        API_KEY = sharedPreferences.getString("targetApikey", "");
         content = (MaterialEditText) findViewById(R.id.achieve_content);
         title = (MaterialEditText) findViewById(R.id.achieve_name);
         confirm = (FloatingActionButton) findViewById(R.id.confirm_add);
         picker_count = (TextView) findViewById(R.id.picker_count);
         achieve_when = (TextView) findViewById(R.id.achieve_when);
-//        reward_count = (Slider) findViewById(R.id.reward_count);
-        picker_count.setText("0개");
+        reward_count = (Slider) findViewById(R.id.reward_count);
         confirm.setOnClickListener(this);
-//        reward_count.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
-//            @Override
-//            public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
-//                picker_count.setText(slider.getValue() + "개");
-//                reward = slider.getValue();
-//            }
-//        });
         GregorianCalendar calendar = new GregorianCalendar();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
+        picker_count.setText("0개");
+        reward_count.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
+            @Override
+            public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
+                picker_count.setText(slider.getValue() + "");
+                reward = slider.getValue();
+            }
+        });
+    }
+    private void setRest() {
+        DeveloperService d = new DeveloperService(getApplicationContext());
+        String END_POINT = d.getEndpoint();
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint(END_POINT)
+                .build();
+        service = restAdapter.create(NetworkService.class);
     }
 
     void setDatePick() {
@@ -104,7 +116,7 @@ public class AddAchievementActivity extends AppCompatActivity implements View.On
                         day = k;
                         isSettings = true;
                     }
-                }, year, month-1, day);
+                }, year, month - 1, day);
                 datePicker.setCancelable(false);
                 datePicker.show();
                 datePicker.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -153,11 +165,10 @@ public class AddAchievementActivity extends AppCompatActivity implements View.On
                 if(!timeSettings)
                     Toast.makeText(AddAchievementActivity.this, "시간 설정을 완료해주세요!", Toast.LENGTH_SHORT).show();
                 else {
-                    sharedCount = sharedPreferences.getInt("count", 1);
                     getTitle = title.getText().toString().trim();
                     getContent = content.getText().toString().trim();
                     getWhen = year + "년 " + month + "월 " + day + "일 " + hour + "시 " + minute + "분";
-                    if (getTitle.equals("")) title.setError("목표 이름을 입력해주세요!");
+                    if (getTitle.equals("")) title.setError("과제 제목을 입력해주세요!");
                     else if (getContent.equals("")) content.setError("목표 내용을 입력해주세요!");
                     else {
                         new MaterialDialog.Builder(AddAchievementActivity.this)
@@ -166,32 +177,20 @@ public class AddAchievementActivity extends AppCompatActivity implements View.On
                                         "[" + getTitle + "]\n"
                                                 + getContent + "\n"
                                                 + "칭찬스티커 " + reward + "개\n\n"
-                                                + "위의 목표를 " + getWhen + "까지로 설정합니다."
+                                                + "기한 : "+getWhen+"\n"
+                                                + "위 정보로 과제를 등록합니다."
                                 )
                                 .theme(Theme.LIGHT)
-                                .positiveText("설정")
+                                .positiveText("등록")
                                 .negativeText("취소")
+                                .negativeColor(Color.parseColor("#8B8B8B"))
+                                .positiveColor(Color.parseColor("#F499B8"))
                                 .callback(new MaterialDialog.ButtonCallback() {
                                     @Override
                                     public void onPositive(MaterialDialog dialog) {
                                         super.onPositive(dialog);
-                                        AlarmManager alarm = (AlarmManager) AddAchievementActivity.this.getSystemService(Context.ALARM_SERVICE);
-                                        Intent intent = new Intent(AddAchievementActivity.this, AlarmService.class)
-                                                .putExtra("title", getTitle)
-                                                .putExtra("content", getContent);
-                                        PendingIntent pender = PendingIntent.getBroadcast(AddAchievementActivity.this, 0, intent, 0);
-                                        Calendar calendar = Calendar.getInstance();
-                                        calendar.set(year, month - 1, day, hour, minute, second);
-                                        alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pender);
-                                        // TODO Must-be Replaced when we use server
-                                        editor.putString("title" + sharedCount, getTitle);
-                                        editor.putString("content" + sharedCount, getContent);
-                                        editor.putString("when" + sharedCount, year + "." + month + "." + day + "." + hour + "." + minute);
-                                        editor.putInt("reward" + sharedCount, reward);
-                                        editor.putInt("count", sharedCount + 1);
-                                        editor.commit();
-                                        Toast.makeText(AddAchievementActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
-                                        finish();
+                                        date = year+"-"+month+"-"+day+" "+hour+":"+minute;
+                                        postArticle();
                                     }
                                 })
                                 .show();
@@ -199,5 +198,44 @@ public class AddAchievementActivity extends AppCompatActivity implements View.On
                     }
                 }
         }
+    }
+    public void postArticle(){
+        service.postArticle(API_KEY, getTitle, Integer.parseInt(picker_count.getText().toString()), date, getContent, new Callback<Article>() {
+            @Override
+            public void success(Article article, Response response) {
+                Toast.makeText(AddAchievementActivity.this, "과제가 등록되었습니다!", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    public void onBackPressed() {
+        new MaterialDialog.Builder(AddAchievementActivity.this)
+                .title("오늘의 어린이상")
+                .content("목표 설정을 취소하고 뒤로 나가시겠습니까?")
+                .positiveText("확인")
+                .negativeText("취소")
+                .negativeColor(Color.parseColor("#8B8B8B"))
+                .positiveColor(Color.parseColor("#F499B8"))
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                        super.onPositive(dialog);
+                        finish();
+                    }
+                })
+                .show();
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+        }
+        return false;
     }
 }

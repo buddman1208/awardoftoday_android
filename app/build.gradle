@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.0"
@@ -38,7 +38,6 @@ dependencies {
     compile('com.github.ganfra:material-spinner:1.1.0') {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
-    compile 'com.h6ah4i.android.materialshadowninepatch:materialshadowninepatch:0.6.4'
     compile 'com.makeramen:roundedimageview:2.2.0'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.getbase:floatingactionbutton:1.9.1'
@@ -46,5 +45,6 @@ dependencies {
     compile('com.afollestad.material-dialogs:commons:0.8.0.1@aar') {
         transitive = true
     }
-//    compile(name:'EDCAN', ext:'aar')
+    compile 'com.github.rey5137:material:1.2.1'
+    compile "com.google.android.gms:play-services:8.1.0"
 }

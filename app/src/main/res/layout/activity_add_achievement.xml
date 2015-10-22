@@ -3,142 +3,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/achieve_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="#ececec"
-            android:hint="목표 이름"
-            android:inputType="textNoSuggestions"
-            android:singleLine="true"
-            android:textColorHint="#ececec"
-            android:textSize="30dp"
-            app:met_errorColor="#FF2727"
-            app:met_floatingLabel="normal"
-            app:met_floatingLabelText="목표 이름"
-            app:met_floatingLabelTextColor="#2D5C37"
-            app:met_floatingLabelTextSize="16dp"
-            app:met_primaryColor="#5fc29c"
-            app:met_textColor="#5fc29c" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/achieve_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ececec"
-            android:hint="목표 내용"
-            android:inputType="textNoSuggestions|textMultiLine"
-            android:maxLines="4"
-            android:textColorHint="#ececec"
-            android:textSize="15dp"
-            app:met_errorColor="#FF2727"
-            app:met_floatingLabel="normal"
-            app:met_floatingLabelText="내용 쓰기"
-            app:met_floatingLabelTextColor="#2D5C37"
-            app:met_floatingLabelTextSize="12dp"
-            app:met_primaryColor="#5fc29c"
-            app:met_textColor="#5fc29c" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/achieve_name"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:background="#ececec"
+                android:hint="과제 이름"
+                android:inputType="textNoSuggestions"
+                android:singleLine="true"
+                android:textColorHint="#ececec"
+                android:textSize="30dp"
+                app:met_errorColor="#FF2727"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="과제 이름"
+                app:met_floatingLabelTextColor="#C87593"
+                app:met_floatingLabelTextSize="16dp"
+                app:met_primaryColor="#F390B2"
+                app:met_textColor="#F390B2" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp">
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/achieve_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ececec"
+                android:hint="과제 내용"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:textColorHint="#ececec"
+                android:textSize="15dp"
+                app:met_errorColor="#FF2727"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="내용 쓰기"
+                app:met_floatingLabelTextColor="#C87593"
+                app:met_floatingLabelTextSize="16dp"
+                app:met_primaryColor="#F390B2"
+                app:met_textColor="#F390B2" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingRight="5dp">
+                android:layout_marginTop="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="3dp"
-                    android:text="칭찬 스티커"
-                    android:textColor="#5fc29c"
-                    android:textSize="15dp" />
+                    android:orientation="horizontal"
+                    android:paddingRight="5dp">
 
-                <TextView
-                    android:id="@+id/picker_count"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="3dp"
+                        android:text="칭찬 스티커"
+                        android:textColor="@color/main_color"
+                        android:textSize="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="3dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_achieve_add_smile" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_achieve_add_gop" />
+
+                        <TextView
+                            android:id="@+id/picker_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="0개"
+                            android:textColor="@color/main_color"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <com.rey.material.widget.Slider
+                    android:id="@+id/reward_count"
+                    style="@style/Material.Widget.Slider.Discrete"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="3dp"
-                    android:text="5개"
-                    android:textColor="#5fc29c"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:sl_maxValue="10"
+                    app:sl_minValue="0"
+                    app:sl_primaryColor="#F390B2"
+                    app:sl_secondaryColor="#CCCCCC"
+                    app:sl_stepValue="1"
+                    app:sl_value="0" />
             </RelativeLayout>
 
-            <!--<com.rey.material.widget.Slider-->
-                <!--android:id="@+id/reward_count"-->
-                <!--style="@style/Material.Widget.Slider.Discrete"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:paddingLeft="5dp"-->
-                <!--android:paddingRight="5dp"-->
-                <!--app:sl_maxValue="10"-->
-                <!--app:sl_minValue="0"-->
-                <!--app:sl_secondaryColor="#64C99F"-->
-                <!--app:sl_stepValue="1"-->
-                <!--app:sl_value="0" />-->
-        </RelativeLayout>
-
-        `
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:background="#CDCDCD" />
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/add_datepick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
+            `
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#CDCDCD" />
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/add_datepick"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/achieve_when"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:text="목표 시간을 설정해주세요!"
-                    android:textColor="#5fc29c"
-                    android:textSize="18dp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="변경하려면 클릭하세요."
-                    android:textColor="#b9b9b9"
-                    android:textSize="12dp" />
-            </LinearLayout>
-        </com.balysv.materialripple.MaterialRippleLayout>
+                    <TextView
+                        android:id="@+id/achieve_when"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="과제 시간을 설정해주세요!"
+                        android:textColor="@color/main_color"
+                        android:textSize="18dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CDCDCD" />
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="변경하려면 클릭하세요."
+                        android:textColor="#b9b9b9"
+                        android:textSize="12dp" />
+                </LinearLayout>
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CDCDCD" />
+        </LinearLayout>
+    </ScrollView>
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/confirm_add"
@@ -146,8 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        app:fab_colorNormal="#5fc29c"
-        app:fab_colorPressed="#75B89A"
+        app:fab_colorNormal="@color/main_color"
+        app:fab_colorPressed="#F3AEC3"
         app:fab_icon="@drawable/ic_circle_ok" />
 
 </FrameLayout>

@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            startActivity(new Intent(getApplicationContext(), DeveloperInfoActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -144,21 +144,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//                new MaterialDialog.Builder(this)
-//                        .title("정렬")
-//                        .items(UpDownList)
-//                        .itemsCallback(new MaterialDialog.ListCallback() {
-//                            @Override
-//                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-//                                if (text.equals("최신순")) editor.putBoolean("byTime", false);
-//                                else if (text.equals("오래된순")) editor.putBoolean("byTime", true);
-//                                else
-//                                    Toast.makeText(MainActivity.this, "이 기능은 준비중입니다", Toast.LENGTH_SHORT).show();
-//                                editor.commit();
-//                                setDefault();
-//                            }
-//                        })
-//                        .show();
             case R.id.main_tab_home:
                 pager.setCurrentItem(0, true);
                 break;
@@ -174,6 +159,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void onPause(){
+        super.onPause();
+    }
     public void onResume() {
         super.onResume();
         setDefault();

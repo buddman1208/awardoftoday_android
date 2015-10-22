@@ -1,9 +1,13 @@
 package kr.edcan.awardoftoday.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,22 +18,29 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import kr.edcan.awardoftoday.R;
 import kr.edcan.awardoftoday.data.User;
 import kr.edcan.awardoftoday.utils.DeveloperService;
 import kr.edcan.awardoftoday.utils.NetworkService;
+import kr.edcan.awardoftoday.utils.RegisterationIntentService;
+import kr.edcan.awardoftoday.utils.RegisterationStatus;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * Created by Junseok Oh on 2015-10-11.
  */
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String API_KEY, userid, userpwd, username;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private String API_KEY, userid, userpwd, username, token;
     private static final int SELECT_KEY = 1111;
+    private BroadcastReceiver broadcastReceiver;
     public String END_POINT;
     NetworkService service;
     RestAdapter restAdapter;
@@ -45,14 +56,16 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        getInstanceIdToken();
         setRest();
+        registBroadcastReceiver();
         setDefault();
     }
 
     private void setDefault() {
         sharedPref = getSharedPreferences("AwardOfToday", 0);
         editor = sharedPref.edit();
-        API_KEY = sharedPref.getString("API_KEY", "");
+        API_KEY = sharedPref.getString("apikey", "");
         logo = (ImageView) findViewById(R.id.logo);
         login = (ImageView) findViewById(R.id.btn_login);
         register = (ImageView) findViewById(R.id.register_button);
@@ -66,19 +79,17 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         user_pwd.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode==KeyEvent.KEYCODE_ENTER){
-                    if(isLogining) onLogin();
-                    else if(isRegistering) onRegister();
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    if (isLogining) onLogin();
+                    else if (isRegistering) onRegister();
                 }
                 return false;
             }
         });
-        if (API_KEY.trim().equals("")) setMainLayout();
-        else startMain();
     }
 
     private void startMain() {
-        service.loginValidate(API_KEY, new Callback<String>() {
+        service.loginValidate(API_KEY, token,  new Callback<String>() {
             @Override
             public void success(String s, Response response) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -152,19 +163,22 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             if (userid.equals("")) user_id.setError("ID를 입력해주세요");
             else if (userpwd.equals("")) user_pwd.setError("비밀번호를 입력해주세요!");
             else {
-                service.userLogin(user_id.getText().toString(), user_pwd.getText().toString(), new Callback<User>() {
+                service.userLogin(user_id.getText().toString(), user_pwd.getText().toString(), token, new Callback<User>() {
                     @Override
                     public void success(User user, Response response) {
-                        Log.e("name", user.name);
                         editor.putString("id", user.id);
                         editor.putString("name", user.name);
                         editor.putString("apikey", user.apikey);
+                        editor.putInt("sticker", user.sticker);
                         editor.putBoolean("isParent", user.isParent);
-                        editor.commit();
                         if (user.targetApikey == null) {
+                            editor.commit();
                             startActivity(new Intent(getApplicationContext(), TutorialActivity.class));
                             finish();
                         } else {
+                            editor.putString("targetName", user.targetName);
+                            editor.putString("targetApikey", user.targetApikey);
+                            editor.commit();
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             finish();
                         }
@@ -248,10 +262,11 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 })
                 .show();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if(isLogining||isRegistering){
+            if (isLogining || isRegistering) {
                 isLogining = isRegistering = false;
                 user_id.setText("");
                 user_pwd.setText("");
@@ -273,5 +288,80 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+    /**
+     * 앱이 실행되어 화면에 나타날때 LocalBoardcastManager에 액션을 정의하여 등록한다.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
+                new IntentFilter(RegisterationStatus.REGISTRATION_READY));
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
+                new IntentFilter(RegisterationStatus.REGISTRATION_GENERATING));
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
+                new IntentFilter(RegisterationStatus.REGISTRATION_COMPLETE));
+
+    }
+
+    /**
+     * 앱이 화면에서 사라지면 등록된 LocalBoardcast를 모두 삭제한다.
+     */
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+        super.onPause();
+    }
+
+
+    /**
+     * Google Play Service를 사용할 수 있는 환경이지를 체크한다.
+     */
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public void getInstanceIdToken() {
+        Log.e("Token", "getInstanceIdToken");
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegisterationIntentService.class);
+            startService(intent);
+        } else
+            Toast.makeText(getApplicationContext(), "기기에서 Play Service가 지원되지 않습니다! \n일부 알림 서비스가 제공되지 않습니다!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void registBroadcastReceiver() {
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.e("Token", "getBroadcast");
+                String action = intent.getAction();
+
+                if (action.equals(RegisterationStatus.REGISTRATION_READY)) {
+                } else if (action.equals(RegisterationStatus.REGISTRATION_GENERATING)) {
+                } else if (action.equals(RegisterationStatus.REGISTRATION_COMPLETE)) {
+                    // 액션이 COMPLETE일 경우
+                    token = intent.getStringExtra("token");
+                    editor.putString("token", token);
+                    editor.commit();
+                    if (API_KEY.trim().equals("")) setMainLayout();
+                    else startMain();
+                }
+
+            }
+        };
+    }
+
 
 }
