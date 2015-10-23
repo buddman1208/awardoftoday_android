@@ -60,113 +60,68 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="칭찬 스티커판에 5개의 스티커가 있어요!"
+                        android:text="우리 영환이 안전하게만 자라다오!"
                         android:textColor="#C9B2F0"
-                        android:textSize="10dp" />
+                        android:textSize="11dp" />
                 </LinearLayout>
             </LinearLayout>
 
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/main_home_sticker_panel"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_weight="3.4"
-                    android:background="@drawable/home_bottom"
-                    android:orientation="vertical"
-                    android:weightSum="3">
+                    android:layout_margin="32dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_card_trophy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="오늘의 어린이상!"
+                        android:textColor="@color/main_color"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="김영환"
+                        android:textColor="@color/hurin_color"
+                        android:textSize="17dp" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
+                        android:layout_width="50dp"
+                        android:layout_height="2dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/hurin_color" />
 
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-
-                        <ImageView
-                            android:layout_width="1dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/stc_ref1" />
-                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:text="위 어린이는 일주일간 \n부모님 말씀을 잘 듣고\n과제를 성실히 수행 하였으므로 \n이 상을 수여함."
+                        android:textColor="#616161"
+                        android:textSize="13dp" />
                 </LinearLayout>
-            </ScrollView>
+            </RelativeLayout>
+
         </LinearLayout>
 
 

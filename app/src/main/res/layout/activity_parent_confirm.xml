@@ -93,7 +93,7 @@
             android:background="#EDEDED" />
 
         <RelativeLayout
-            android:id="@+id/parent_alert_footer_left"
+            android:id="@+id/parent_alert_footer_right"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

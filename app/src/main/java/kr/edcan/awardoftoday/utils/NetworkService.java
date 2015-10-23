@@ -45,6 +45,10 @@ public interface NetworkService {
                        Callback<User> callback);
 
     @FormUrlEncoded
+    @POST("/parent/configureArticle")
+    void configureArticle(@Field("targetApikey") String targetApikey, @Field("articleKey") String articleKey, @Field("confirm") boolean isConfirm, Callback<String> callback);
+
+    @FormUrlEncoded
     @POST("/parent/postArticle")
     void postArticle(@Field("apikey") String apikey, @Field("title") String title,
                      @Field("sticker") int sticker, @Field("date") String date, @Field("content") String content,
@@ -61,7 +65,7 @@ public interface NetworkService {
 
     @FormUrlEncoded
     @POST("/child/finishArticle")
-    void finishArticle(@Field("token") String token, @Field("apikey") String apikey, @Field("articleKey") String articleKey, Callback<String> callback);
+    void finishArticle(@Field("token") String token, @Field("targetApikey") String targetApikey, @Field("articleKey") String articleKey, Callback<String> callback);
 
     // Article Interface
     @FormUrlEncoded

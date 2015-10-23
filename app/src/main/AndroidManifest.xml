@@ -19,7 +19,11 @@
         android:label="오늘의 어린이상!"
         android:theme="@style/BasicTheme.ActionBar" >
         <activity android:name=".activity.GetIPActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.MainActivity"
@@ -31,7 +35,8 @@
 
         <receiver android:name=".utils.AlarmService" />
 
-        <activity android:name=".activity.TutorialActivity" />
+        <activity android:name=".activity.TutorialActivity"
+            android:theme="@style/BasicTheme"/>
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/BasicTheme" />
@@ -79,11 +84,7 @@
 
         <activity android:name=".activity.ParentConfirmActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

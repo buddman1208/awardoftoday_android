@@ -132,7 +132,7 @@ public class Tab_Achieve extends Fragment implements View.OnClickListener {
                 for (Article article : articles) {
                     // Create
                     achieve_cardview = (CardView) inflater.inflate(R.layout.achieve_cardview_layout, null);
-                    TextView cardview_title, cardview_duedate, cardview_sticker_count, cardview_content, cardview_articleKey;
+                    final TextView cardview_title, cardview_duedate, cardview_sticker_count, cardview_content, cardview_articleKey;
                     cardview_title = (TextView) achieve_cardview.findViewById(R.id.achieve_cardview_title);
                     cardview_duedate = (TextView) achieve_cardview.findViewById(R.id.achieve_cardview_duedate);
                     cardview_sticker_count = (TextView) achieve_cardview.findViewById(R.id.achieve_cardview_stickercount);
@@ -141,11 +141,30 @@ public class Tab_Achieve extends Fragment implements View.OnClickListener {
                     footer_right = (RelativeLayout) achieve_cardview.findViewById(R.id.achieve_cardview_footer_right);
                     cardview_articleKey = (TextView) achieve_cardview.findViewById(R.id.achieve_cardview_articleKey);
 
+                    if(isParent){
+                        footer_right.setVisibility(View.GONE);
+                        footer_left.setVisibility(View.GONE);
+                    }
                     if(article.getWaiting() == true){
                         footer_left.setEnabled(false);
                         footer_right.setEnabled(false);
                     } else{
-                        footer_left.setOnClickListener(Tab_Achieve.this);
+                        footer_left.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                service.finishArticle(token, targetApikey, cardview_articleKey.getText().toString(), new Callback<String>() {
+                                    @Override
+                                    public void success(String s, Response response) {
+                                        Toast.makeText(getContext(), "부모님께 알림이 전송되었습니다! \n 부모님이 확인해 주실때까지 기다려주세요", Toast.LENGTH_SHORT).show();
+                                        footer_left.setEnabled(false);
+                                    }
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
                         footer_right.setOnClickListener(Tab_Achieve.this);
                     }
                     // OnClick Event
@@ -153,7 +172,7 @@ public class Tab_Achieve extends Fragment implements View.OnClickListener {
                     cardview_duedate.setText(article.getDate());
                     cardview_content.setText(article.getContent());
                     cardview_sticker_count.setText(article.getSticker() + "");
-                    cardview_articleKey.setText(article.getArticleKey()+"");
+                    cardview_articleKey.setText(article.getArticleKey());
                     main_view.addView(achieve_cardview);
                 }
                 loading.dismiss();
@@ -207,17 +226,7 @@ public class Tab_Achieve extends Fragment implements View.OnClickListener {
                 break;
             case R.id.achieve_cardview_footer_left:
                 TextView asdf = (TextView) v.findViewById(R.id.achieve_cardview_articleKey);
-                service.finishArticle(token, apikey, asdf.getText().toString(), new Callback<String>() {
-                    @Override
-                    public void success(String s, Response response) {
-                        Toast.makeText(getContext(), "부모님께 알림이 전송되었습니다! \n 부모님이 확인해 주실때까지 기다려주세요", Toast.LENGTH_SHORT).show();
-                        footer_left.setEnabled(false);
-                    }
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+
                 break;
             case R.id.achieve_cardview_footer_right:
                 break;
